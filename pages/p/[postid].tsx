@@ -9,10 +9,19 @@ import Main from "../../layout/Main";
 import { serialize } from "../../lib/serializeSlate";
 import type { Category } from "../../types/Category";
 import type { Post } from "../../types/Post";
+import readingTime from "reading-time";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faClock } from "@fortawesome/free-solid-svg-icons";
 
 type Props = { post: Post; categories: Category[]; posts: Post[] };
 
 const Post: NextPage<Props> = ({ post, categories, posts }) => {
+	const originalString = serialize(post.content)
+		.map((i: any) => {
+			return i.props.children[0].props.children;
+		})
+		.toString();
+
 	return (
 		<Main>
 			<Head>
@@ -22,10 +31,11 @@ const Post: NextPage<Props> = ({ post, categories, posts }) => {
 			<div className="grid lg:grid-cols-post grid-cols-1 gap-4">
 				<article className="max-w-none prose prose-stone prose-md dark:prose-invert">
 					<p>
-						{`Posted by ${post.author.name} ${moment(
+						{`Posted by ${post.author.name}, ${moment(
 							post.publishedDate,
 							"YYYYMMDD"
-						).fromNow()} ${post.category ? "in " + post.category?.name : ""}`}
+						).fromNow()} ${post.category ? "in " + post.category?.name : ""} `}
+						<FontAwesomeIcon icon={faClock} /> {readingTime(originalString).text}
 					</p>
 					{serialize(post.content)}
 				</article>
