@@ -5,6 +5,7 @@ import axios from "axios";
 import config from "../app.config";
 import type { Post } from "../types/Post";
 import type { Category } from "../types/Category";
+import Categories from "../components/Categories";
 
 type Props = {
 	posts: Post[];
@@ -19,13 +20,7 @@ const Home: NextPage<Props> = ({ posts, categories }) => {
 					<Posts posts={posts} />
 				</div>
 				<div className="flex mt-11 flex-col gap-6 relative lg:sticky top-0 self-start">
-					<div>
-						<h1 className="text-lg">Categories</h1>
-						<div>
-							{categories.length > 0 &&
-								categories.map((category, i) => <p key={i}>{category.name}</p>)}
-						</div>
-					</div>
+					<Categories categories={categories} />
 				</div>
 			</div>
 		</Main>

@@ -4,6 +4,7 @@ import { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import config from "../../app.config";
+import Categories from "../../components/Categories";
 import Main from "../../layout/Main";
 import { serialize } from "../../lib/serializeSlate";
 import type { Category } from "../../types/Category";
@@ -17,7 +18,7 @@ const Post: NextPage<Props> = ({ post, categories, posts }) => {
 			<Head>
 				<title>{`${post.title} | Ahmet's Blog`}</title>
 			</Head>
-			<h1 className="text-4xl font-bold my-8">{post.title}</h1>
+			<h1 className="text-2xl lg:text-4xl font-bold my-8">{post.title}</h1>
 			<div className="grid lg:grid-cols-post grid-cols-1 gap-4">
 				<article className="max-w-none prose prose-stone prose-md dark:prose-invert">
 					<p>
@@ -29,25 +30,19 @@ const Post: NextPage<Props> = ({ post, categories, posts }) => {
 					{serialize(post.content)}
 				</article>
 				<div className="flex flex-col gap-6 relative lg:sticky top-0 self-start">
-					<div>
-						<h1 className="text-lg">Categories</h1>
-						<div>
-							{categories.length > 0 &&
-								categories.map((category, i) => <p key={i}>{category.name}</p>)}
-						</div>
-					</div>
+					<Categories categories={categories} />
 					<div>
 						<h1 className="text-lg">More Posts</h1>
-						<div>
+						<ul className="list-disc list-inside">
 							{posts.length > 0 &&
 								posts.map((post, i) => (
 									<Link href={`/p/${[post.id]}`} key={i}>
 										<a className="hover:underline">
-											<p>{post.title}</p>
+											<li>{post.title}</li>
 										</a>
 									</Link>
 								))}
-						</div>
+						</ul>
 					</div>
 				</div>
 			</div>

@@ -5,7 +5,7 @@ import { faUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 const Navbar = () => {
 	return (
 		<nav className="py-4">
-			<div className="max-w-[960px] mx-auto my-0 flex justify-between align-middle">
+			<div className="max-w-[960px] mx-auto px-4 lg:px-0 flex justify-between align-middle">
 				<Link href="/">
 					<a className="hover:underline">
 						<p className="text-2xl">Ahmet</p>
