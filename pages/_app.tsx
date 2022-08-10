@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 import Head from "next/head";
 import Footer from "../components/Footer";
 import { Router } from "next/router";
-import NProgress from "nprogress"; //nprogress module
+import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 
 Router.events.on("routeChangeStart", () => NProgress.start());
@@ -16,6 +16,10 @@ function MyApp({ Component, pageProps }: AppProps) {
 		<>
 			<Head>
 				<title>{`Ahmet's Blog`}</title>
+				<meta
+					name="description"
+					content="My blog for tutorials and my experiences with web development."
+				/>
 			</Head>
 			<Navbar />
 			<Component {...pageProps} />

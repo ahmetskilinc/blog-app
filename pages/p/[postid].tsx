@@ -12,10 +12,11 @@ import type { Post } from "../../types/Post";
 import readingTime from "reading-time";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock } from "@fortawesome/free-solid-svg-icons";
+import { Fragment } from "react";
 
 type Props = { post: Post; categories: Category[]; posts: Post[] };
 
-const Post: NextPage<Props> = ({ post, categories, posts }) => {
+const PostHeader = ({ post }: { post: Post }) => {
 	const originalString = serialize(post.content)
 		.map((i: any) => {
 			return i.props.children[0].props.children;
@@ -23,20 +24,50 @@ const Post: NextPage<Props> = ({ post, categories, posts }) => {
 		.toString();
 
 	return (
+		<>
+			<h1 className="text-2xl lg:text-4xl font-bold my-8">{post.title}</h1>
+			<p className="opacity-70">
+				{`Posted by`}{" "}
+				<Link href={`/a/${post.author.name}`}>
+					<a className="hover:underline">{post.author.name}</a>
+				</Link>
+				{`, `} {moment(post.publishedDate, "YYYYMMDD").fromNow()}
+				{post.category && (
+					<>
+						in{" "}
+						<Link href={`${post.category?.name}`}>
+							<a className="hover:underline">in {post.category?.name}</a>
+						</Link>{" "}
+					</>
+				)}
+				<FontAwesomeIcon icon={faClock} /> {readingTime(originalString).text}
+			</p>
+			{post.tags.length > 0 && (
+				<p className="opacity-60">
+					Tags:{" "}
+					{post.tags.map((tag, i) => (
+						<Fragment key={tag.name}>
+							<Link href={`/t/${tag.name}`}>
+								<a className="hover:underline">{tag.name}</a>
+							</Link>
+							{i === post.tags.length - 1 ? "" : ", "}
+						</Fragment>
+					))}
+				</p>
+			)}
+		</>
+	);
+};
+
+const Post: NextPage<Props> = ({ post, categories, posts }) => {
+	return (
 		<Main>
 			<Head>
 				<title>{`${post.title} | Ahmet's Blog`}</title>
 			</Head>
-			<h1 className="text-2xl lg:text-4xl font-bold my-8">{post.title}</h1>
-			<div className="grid lg:grid-cols-post grid-cols-1 gap-4">
+			<PostHeader post={post} />
+			<div className="grid lg:grid-cols-post grid-cols-1 gap-4 mt-4">
 				<article className="max-w-none prose prose-stone prose-md dark:prose-invert">
-					<p>
-						{`Posted by ${post.author.name}, ${moment(
-							post.publishedDate,
-							"YYYYMMDD"
-						).fromNow()} ${post.category ? "in " + post.category?.name : ""} `}
-						<FontAwesomeIcon icon={faClock} /> {readingTime(originalString).text}
-					</p>
 					{serialize(post.content)}
 				</article>
 				<div className="flex flex-col gap-6 relative lg:sticky top-0 self-start">
@@ -46,11 +77,13 @@ const Post: NextPage<Props> = ({ post, categories, posts }) => {
 						<ul className="list-disc list-inside">
 							{posts.length > 0 &&
 								posts.map((post, i) => (
-									<Link href={`/p/${post.id}`} key={i}>
-										<a className="hover:underline">
-											<li>{post.title}</li>
-										</a>
-									</Link>
+									<li key={i}>
+										<Link href={`/p/${post.id}`}>
+											<a className="hover:underline opacity-70 hover:opacity-100">
+												{post.title}
+											</a>
+										</Link>
+									</li>
 								))}
 						</ul>
 					</div>

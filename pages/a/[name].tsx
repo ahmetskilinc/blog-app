@@ -14,12 +14,12 @@ type Props = {
 	categories: Category[];
 };
 
-const PostsByCategory: NextPage<Props> = ({ posts, categories }) => {
+const PostsByAuthor: NextPage<Props> = ({ posts, categories }) => {
 	const router = useRouter();
 	return (
 		<Main>
 			<>
-				<h1 className="text-3xl font-bold">{`Posts in ${router.query.name}`}</h1>
+				<h1 className="text-3xl font-bold">{`Posts by ${router.query.name}`}</h1>
 				<div className="grid lg:grid-cols-post grid-cols-1 gap-4">
 					<div>
 						<Posts posts={posts} />
@@ -33,12 +33,12 @@ const PostsByCategory: NextPage<Props> = ({ posts, categories }) => {
 	);
 };
 
-export default PostsByCategory;
+export default PostsByAuthor;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
 	try {
 		const posts = (
-			await axios.get(`${config.appUrl}/api/postsbycategory?name=${context.query.name}`)
+			await axios.get(`${config.appUrl}/api/postsbyauthor?name=${context.query.name}`)
 		).data;
 		const categories = (await axios.get(`${config.appUrl}/api/categories`)).data;
 

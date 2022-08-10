@@ -11,11 +11,13 @@ const Categories = ({ categories }: Props) => {
 			<ul className="list-disc list-inside">
 				{categories.length > 0 &&
 					categories.map((category, i) => (
-						<Link href={`/c/${category.name}`} key={i}>
-							<a className="hover:underline">
-								<li>{category.name}</li>
-							</a>
-						</Link>
+						<li key={i}>
+							<Link href={`/c/${category.name}`}>
+								<a className="hover:underline opacity-70 hover:opacity-100">
+									{category.name}
+								</a>
+							</Link>
+						</li>
 					))}
 			</ul>
 		</div>
