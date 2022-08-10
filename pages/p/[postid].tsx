@@ -46,7 +46,7 @@ const Post: NextPage<Props> = ({ post, categories, posts }) => {
 						<ul className="list-disc list-inside">
 							{posts.length > 0 &&
 								posts.map((post, i) => (
-									<Link href={`/p/${[post.id]}`} key={i}>
+									<Link href={`/p/${post.id}`} key={i}>
 										<a className="hover:underline">
 											<li>{post.title}</li>
 										</a>
