@@ -19,7 +19,7 @@ const Posts = ({ posts }: Props) => {
 						})
 						.toString();
 					return (
-						<div className="my-11 flex flex-col" key={post.id}>
+						<div className="my-11" key={post.id}>
 							<Link href={`/p/${post.id}`}>
 								<a className="hover:underline">
 									<h2 className="text-xl">{post.title}</h2>
