@@ -87,6 +87,9 @@ const Post: NextPage<Props> = ({ post, categories, posts }) => {
 								))}
 						</ul>
 					</div>
+					<div className="h-52 w-full bg-slate-700">
+						<p>I would like to serve uninvasive ads here</p>
+					</div>
 				</div>
 			</div>
 		</Main>
