@@ -7,15 +7,18 @@ import { v4 as uuid } from "uuid";
 export const serialize = (children) =>
 	children.map((node, i) => {
 		if (Text.isText(node)) {
-			let text;
 			if (node.bold) {
-				text = <strong key={i + uuid()}>{node.text}</strong>;
+				return <strong key={i + uuid()}>{node.text}</strong>;
 			}
 			if (node.code) {
-				text = <code key={i + uuid()}>{node.text}</code>;
+				return (
+					<pre key={i + uuid()}>
+						<code>{node.text}</code>
+					</pre>
+				);
 			}
 			if (node.italic) {
-				text = <em key={i + uuid()}>{node.text}</em>;
+				return <em key={i + uuid()}>{node.text}</em>;
 			}
 			return <Fragment key={i + uuid()}>{node.text}</Fragment>;
 		}
@@ -53,7 +56,9 @@ export const serialize = (children) =>
 						<a>{serialize(node.children)}</a>
 					</Link>
 				);
-			default:
+			case "p":
 				return <p key={i + uuid()}>{serialize(node.children)}</p>;
+			default:
+				return serialize(node.children);
 		}
 	});

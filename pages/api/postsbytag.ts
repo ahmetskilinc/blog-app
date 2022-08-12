@@ -9,8 +9,8 @@ const Posts = async (req: NextApiRequest, res: NextApiResponse<void | Post[]>) =
 		const stringifiedQuery = qs.stringify(
 			{
 				where: {
-					"author.name": {
-						equals: req.query.name,
+					tags: {
+						contains: req.query.name,
 					},
 				},
 			},

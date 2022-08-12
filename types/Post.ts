@@ -15,4 +15,5 @@ export type Post = {
 		name: string;
 	}[];
 	content: any;
+	slug: string;
 };

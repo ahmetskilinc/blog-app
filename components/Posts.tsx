@@ -1,10 +1,8 @@
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClock, faCalendarDays } from "@fortawesome/free-solid-svg-icons";
+import { faCalendarDays } from "@fortawesome/free-solid-svg-icons";
 import moment from "moment";
 import type { Post } from "../types/Post";
-import { serialize } from "../lib/serializeSlate";
-import readingTime from "reading-time";
 
 type Props = { posts: Post[] };
 
@@ -13,14 +11,9 @@ const Posts = ({ posts }: Props) => {
 		<>
 			{posts.length > 0 ? (
 				posts.map((post) => {
-					const originalString = serialize(post.content)
-						.map((i: any) => {
-							return i.props.children[0].props.children;
-						})
-						.toString();
 					return (
 						<div className="my-11" key={post.id}>
-							<Link href={`/p/${post.id}`}>
+							<Link href={`/p/${post.slug}`}>
 								<a className="hover:underline">
 									<h2 className="text-xl">{post.title}</h2>
 								</a>
@@ -29,10 +22,6 @@ const Posts = ({ posts }: Props) => {
 								<p className="text-sm">
 									<FontAwesomeIcon icon={faCalendarDays} />{" "}
 									{moment(post.publishedDate, "YYYYMMDD").fromNow()}
-								</p>
-								<p className="text-sm">
-									<FontAwesomeIcon icon={faClock} />{" "}
-									{readingTime(originalString).text}
 								</p>
 							</div>
 						</div>

@@ -4,29 +4,26 @@ import config from "../../app.config";
 import type { Post } from "../../types/Post";
 import qs from "qs";
 
-const Posts = async (req: NextApiRequest, res: NextApiResponse<Post[]>) => {
+const Posts = async (req: NextApiRequest, res: NextApiResponse<void | Post[]>) => {
 	if (req.method === "GET") {
 		const stringifiedQuery = qs.stringify(
 			{
 				where: {
-					category: {
-						name: {
-							equals: req.query.name,
-						},
+					"category.name": {
+						equals: req.query.name,
 					},
 				},
 			},
 			{ addQueryPrefix: true }
 		);
 
-		console.log(`${config.payloadEndpoint}/posts${stringifiedQuery}`);
-
 		const posts = await axios({
 			method: "GET",
-			url: `${config.payloadEndpoint}/posts${stringifiedQuery}`,
+			url: `${config.payloadEndpoint}/posts${stringifiedQuery}&sort=-publishedDate`,
 		})
 			.then((response) => {
-				return response.data.docs;
+				const data: Post[] = response.data.docs;
+				return data;
 			})
 			.catch((error) => {
 				console.error("Error: ", error);

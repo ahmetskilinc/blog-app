@@ -21,7 +21,7 @@ const Home: NextPage<Props> = ({ posts, categories }) => {
 				</div>
 				<div className="flex mt-11 flex-col gap-6 relative lg:sticky top-0 self-start">
 					<Categories categories={categories} />
-					<div className="h-52 w-full bg-slate-700">
+					<div className="h-28 w-full bg-slate-700 p-8 rounded-md">
 						<p>I would like to serve uninvasive ads here</p>
 					</div>
 				</div>

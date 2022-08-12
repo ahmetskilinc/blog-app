@@ -9,38 +9,36 @@ import Main from "../../layout/Main";
 import { serialize } from "../../lib/serializeSlate";
 import type { Category } from "../../types/Category";
 import type { Post } from "../../types/Post";
-import readingTime from "reading-time";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClock } from "@fortawesome/free-solid-svg-icons";
 import { Fragment } from "react";
 
 type Props = { post: Post; categories: Category[]; posts: Post[] };
 
 const PostHeader = ({ post }: { post: Post }) => {
-	const originalString = serialize(post.content)
-		.map((i: any) => {
-			return i.props.children[0].props.children;
-		})
-		.toString();
-
 	return (
 		<>
 			<h1 className="text-2xl lg:text-4xl font-bold my-8">{post.title}</h1>
 			<p className="opacity-70">
-				{`Posted by`}{" "}
-				<Link href={`/a/${post.author.name}`}>
-					<a className="hover:underline">{post.author.name}</a>
-				</Link>
-				{`, `} {moment(post.publishedDate, "YYYYMMDD").fromNow()}
+				Posted
+				{post.author ? (
+					<>
+						{` by `}
+						<Link href={`/a/${post.author.name}`}>
+							<a className="hover:underline">{post.author.name}</a>
+						</Link>
+						{", "}
+					</>
+				) : (
+					" "
+				)}
+				{moment(post.publishedDate, "YYYYMMDD").fromNow()}
 				{post.category && (
 					<>
-						in{" "}
+						{" in "}
 						<Link href={`${post.category?.name}`}>
-							<a className="hover:underline">in {post.category?.name}</a>
-						</Link>{" "}
+							<a className="hover:underline">{post.category?.name}</a>
+						</Link>
 					</>
 				)}
-				<FontAwesomeIcon icon={faClock} /> {readingTime(originalString).text}
 			</p>
 			{post.tags.length > 0 && (
 				<p className="opacity-60">
@@ -78,7 +76,7 @@ const Post: NextPage<Props> = ({ post, categories, posts }) => {
 							{posts.length > 0 &&
 								posts.map((post, i) => (
 									<li key={i}>
-										<Link href={`/p/${post.id}`}>
+										<Link href={`/p/${post.slug}`}>
 											<a className="hover:underline opacity-70 hover:opacity-100">
 												{post.title}
 											</a>
@@ -100,7 +98,7 @@ export default Post;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
 	try {
-		const post = (await axios.get(`${config.appUrl}/api/post?id=${context.query.postid}`)).data;
+		const post = (await axios.get(`${config.appUrl}/api/post?slug=${context.query.slug}`)).data;
 		const categories = (await axios.get(`${config.appUrl}/api/categories`)).data;
 		const posts = (await axios.get(`${config.appUrl}/api/posts`)).data;
 

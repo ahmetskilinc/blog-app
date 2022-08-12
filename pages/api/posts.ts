@@ -7,7 +7,7 @@ const Posts = async (req: NextApiRequest, res: NextApiResponse<Post[]>) => {
 	if (req.method === "GET") {
 		const posts = await axios({
 			method: "GET",
-			url: `${config.payloadEndpoint}/posts`,
+			url: `${config.payloadEndpoint}/posts?sort=-publishedDate`,
 		})
 			.then((response) => {
 				return response.data.docs;
