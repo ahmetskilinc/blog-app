@@ -1,0 +1,366 @@
+---
+title: Build a blog with Nextjs, Markdown and TailwindCSS
+author: Authors Name
+category: Tutorial
+tags: nextjs, tutorial, typescript
+publishedOn: August 17 2022
+---
+
+import PostWrapper from "../../layout/PostWrapper";
+import OtherRandomPosts from "../../components/OtherRandomPosts";
+
+<PostWrapper>
+
+# Build a blog with Nextjs, Markdown and TailwindCSS
+
+## What is Nextjs?
+
+[Next.js](https://nextjs.org) is a flexible [React](https://reactjs.org) framework that gives you the **building blocks** to create **fast web applications**.
+
+### Why Next.js?
+
+-   Built in routing (`/pages` folder)
+-   Built in server side rendering (SSR)
+-   Built in API route (`/pages/api` folder)
+-   Large community for support
+
+## What is TailwindCSS?
+
+[TailwindCSS](https://tailwindcss.com) is a CSS library that allows you to build and prototype applications UIs quickly using utility classes.
+
+### Why TailwindCSS?
+
+-   Utility classes for almost every aspect of web applications
+-   Large community for support
+
+## What is Markdown?
+
+Markdown is a markup language like HTML but, without the `< >` tags. Instead it uses other symbols such as `#` to define a head, or `-` to define lists. You can see more of the symbols Markdown uses [here](https://www.markdownguide.org/basic-syntax/).
+
+### Why Markdown?
+
+-   Easy to learn
+-   Easy to implement into any application
+-   Large community for support
+
+## Initialise Next.js App
+
+Run this command in your terminal to initialise a Next.js app:
+`yarn create next-app --typescript`
+
+Once the app is initialised, open the folder in your favourite text editor or IDE. I prefer [Visual Studio Code](https://code.visualstudio.com).
+
+## Clear out the boilerplate
+
+To setup the `_app.tsx` file replace it with the following:
+
+```typescript
+import "../styles/globals.css";
+import type { AppProps } from "next/app";
+import Head from "next/head";
+
+function MyApp({ Component, pageProps }: AppProps) {
+	return (
+		<>
+			<Head>
+				<title>{`Ahmet's Blog`}</title> <!-- Add your page title here -->
+				<meta name="description" content="My blog." /> <!-- Add your page description here -->
+			</Head>
+			<Component {...pageProps} />
+		</>
+	);
+}
+
+export default MyApp;
+```
+
+Next we will clear out the `/styles` folder, delete every file except `globals.css`. You can delete the contents of `globals.css` for now.
+
+### Install dependencies
+
+We have 12 dependencies we need to install and setup.
+
+### TailwindCSS
+
+Let's get Tailwind setup. Run these 2 commands in your terminal:
+
+```shell
+yarn add -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+```
+
+You should now see a new file in your root named `tailwind.config.js`, Replace its contents with the following:
+
+```typescript
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+	content: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
+	theme: {
+		extend: {},
+	},
+	plugins: [],
+};
+```
+
+Then in your `globals.css` file from earlier, add the following to include our Tailwind styling:
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+To test that it is working, you can add the following into the `index.tsx` file, within the return statement:
+
+```html
+<h1 className="text-3xl font-bold underline"> Hello world! </h1>
+```
+
+Then run: `yarn dev` and navigate to `localhost:3000` to check it is working.
+
+### Add Markdown/MDX
+
+To add Markdown parsing to out application we'll be using a few packages, lets add them with the following command in our terminal:
+
+```shell
+yarn add @mdx-js/loader @mdx-js/react @next/mdx gray-matter axios remark-frontmatter
+```
+
+Once you've added the packages. We need to modify the `next.config.js` file. Delete it's contents and replace it with the following:
+
+```typescript
+/** @type {import('next').NextConfig} */
+import remarkFrontmatter from "remark-frontmatter";
+
+export default {
+	webpack: (config, options) => {
+		config.module.rules.push({
+			test: /\.mdx?$/,
+			use: [
+				options.defaultLoaders.babel,
+				{
+					loader: "@mdx-js/loader",
+					options: {
+						providerImportSource: "@mdx-js/react",
+						remarkPlugins: [remarkFrontmatter],
+					},
+				},
+			],
+		});
+
+		return config;
+	},
+	reactStrictMode: true,
+	swcMinify: true,
+	pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
+};
+```
+
+and rename it from `next.config.js` to `next.config.mjs`
+
+Next we will need a file to find and parse all of the post files we create in the `/pages/posts` folder. Create a folder in your root named `utils` then add a file `getPosts.js` with the following:
+
+```javascript
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
+
+export const getPosts = (pageIndex) => {
+	const dirFiles = fs.readdirSync(path.join(process.cwd(), "pages", "posts"), {
+		withFileTypes: true,
+	});
+
+	const posts = dirFiles
+		.map((file) => {
+			if (!file.name.endsWith(".mdx")) return;
+
+			const fileContent = fs.readFileSync(
+				path.join(process.cwd(), "pages", "posts", file.name),
+				"utf-8"
+			);
+			const { data, content } = matter(fileContent);
+
+			const slug = file.name.replace(/.mdx$/, "");
+			return { data, content, slug };
+		})
+		.filter((post) => post);
+
+	return posts;
+};
+```
+
+What this file does is gets all of the files within `/pages/posts` and if they end with `.mdx` it will return it in an array of posts with its data, content and a slug for it.
+
+### Lets list all of our posts
+
+First create the `/pages/posts` folder. Then create a file inside it, call it `first-post.mdx`.
+
+Inside the post file add the following:
+
+```markdown
+---
+title: Building a blog
+author: Authors Name
+category: Tutorial
+tags: nextjs, tutorial, typescript
+publishedOn: August 17 2022
+---
+
+# Look ma' I'm building a blog
+
+## My first post!
+```
+
+To test this now, we can navigate to `localhost:3000/posts/first-post`. You should see your markdown file presented in HTML.
+
+### Listing the posts in `index.tsx`
+
+First at the top of the `index.tsx` file lets add our imports:
+
+```typescript
+import type { GetServerSideProps, NextPage } from "next";
+import type { Post } from "../types/Post";
+import { getPosts } from "../utils/getPosts";
+```
+
+We need to create a `Post` type for out posts. So create a new folder `types` in our root, then create a file `Post.ts` with the following:
+
+```typescript
+export type Post = {
+	data: {
+		title: string;
+		author: string;
+		publishedOn: any;
+		category?: string;
+		tags: string[];
+	};
+	content: any;
+	slug: string;
+};
+```
+
+At the bottom of the `index.tsx` file lets add a `getServerSideProps` function:
+
+```typescript
+export const getServerSideProps: GetServerSideProps = async () => {
+	try {
+		const posts = getPosts();
+
+		return {
+			props: {
+				posts,
+			},
+		};
+	} catch (error) {
+		console.error("Error", error);
+		return {
+			notFound: true,
+		};
+	}
+};
+```
+
+Not above the `NextPage` component, we need to define the type for out `Props`. Add the following:
+
+```typescript
+type Props = {
+	posts: Post[];
+};
+```
+
+Then we need to inject our props into the index page by adding it:
+
+```typescript
+// Replace this line in index.tsx
+const Home: NextPage<Props> = ({ posts }) => {
+	return <h1 className="text-3xl font-bold underline"> Hello world! </h1>;
+};
+```
+
+To list the posts, we need to `map` over our `posts` array. To do this we replace our return statement with the following:
+
+```typescript
+return (
+	<>
+		{posts.length > 0 ? (
+			posts.map((post) => {
+				return (
+					<div className="my-11" key={post.data.title}>
+						<Link href={`/posts/${post.slug}`}>
+							<a className="hover:underline">
+								<h2 className="text-xl">{post.data.title}</h2>
+							</a>
+						</Link>
+					</div>
+				);
+			})
+		) : (
+			<p>no posts</p>
+		)}
+	</>
+);
+```
+
+Make sure to add `import Link from "next/link";` to the top of the file to import the `next/link` component.
+
+Navigate to `localhost:3000` to see a list of your posts. There should only be 1 at the moment. Try clicking it to navigate to the post!
+
+### Adding styling using TailwindCSS
+
+First run `yarn add @tailwindcss/typography` to add TailwindCSS Typography which allows us to style our blog page without adding classes everywhere.
+
+Then add `require("@tailwindcss/typography")` to the `tailwind.config.js` file inside the `plugins` array. This tells tailwind that we intend on using this plugin.
+
+In order to add the styling we're going to create a layout file which wraps around our post.
+
+In your root create a folder named `layout` and create a file inside `PostWrapper.tsx` with the following content:
+
+```typescript
+import { FunctionComponent, ReactNode } from "react";
+
+type Props = {
+	children: ReactNode;
+};
+
+const PostWrapper: FunctionComponent<Props> = ({ children }) => {
+	return <article className="prose prose-stone prose-invert">{children}</article>;
+};
+
+export default PostWrapper;
+```
+
+Then we need to add it to our .mdx post file. (You will need to do this for every post you create).
+
+```markdown
+---
+title: Building a blog
+author: Authors Name
+category: Tutorial
+tags: nextjs, tutorial, typescript
+publishedOn: August 17 2022
+---
+
+import PostWrapper from "../../layout/PostWrapper";
+
+<PostWrapper>
+
+# Look ma' I'm building a blog
+
+## My first post!
+
+</PostWrapper>
+```
+
+We also need to tell Tailwind that we have another folder we want it to check for styling. Replace `content` array inside `tailwind.config.js` with: `"./pages/**/*.{js,ts,jsx,tsx,mdx}", "./components/**/*.{js,ts,jsx,tsx}", "./layout/**/*.{js,ts,jsx,tsx}",`
+
+As you can see above we're wrapping the content part of the `.mdx` file with a component.
+
+If you now navigate to `localhost:3000/posts/first-post` it should have some styling applied to it.
+
+### Add better syntax highlighting
+
+Coming Soon!
+
+</PostWrapper>
+
+<OtherRandomPosts />

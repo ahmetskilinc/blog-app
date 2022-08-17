@@ -1,4 +1,5 @@
 import "../styles/globals.css";
+import "../styles/prism.css";
 import type { AppProps } from "next/app";
 import Navbar from "../components/Navbar";
 import Head from "next/head";
@@ -6,6 +7,9 @@ import Footer from "../components/Footer";
 import { Router } from "next/router";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
+import Main from "../layout/Main";
+import { MDXProvider } from "@mdx-js/react";
+import MDXComponents from "../components/MDXComponents";
 
 Router.events.on("routeChangeStart", () => NProgress.start());
 Router.events.on("routeChangeComplete", () => NProgress.done());
@@ -22,7 +26,11 @@ function MyApp({ Component, pageProps }: AppProps) {
 				/>
 			</Head>
 			<Navbar />
-			<Component {...pageProps} />
+			<Main>
+				<MDXProvider components={MDXComponents}>
+					<Component {...pageProps} />
+				</MDXProvider>
+			</Main>
 			<Footer />
 		</>
 	);

@@ -1,19 +1,11 @@
 export type Post = {
-	id: string;
-	title: string;
-	author: {
-		id: string;
-		email: string;
-		name: string;
+	data: {
+		title: string;
+		author: string;
+		publishedOn: any;
+		category?: string;
+		tags: string[];
 	};
-	publishedDate: any;
-	category?: {
-		id: string;
-		name: string;
-	};
-	tags: {
-		name: string;
-	}[];
 	content: any;
 	slug: string;
 };
