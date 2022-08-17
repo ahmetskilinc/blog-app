@@ -1,0 +1,55 @@
+---
+title: Better Syntax Hightlighting with PrismJS
+author: Ahmet Kilinc
+category: Tutorial
+tags: nextjs, tutorial, typescript
+publishedOn: August 18 2022
+---
+
+import PostWrapper from "../../layout/PostWrapper";
+import OtherRandomPosts from "../../components/OtherRandomPosts";
+import PostHeader from "../../components/PostHeader";
+
+<PostWrapper>
+
+<PostHeader title={title} author={author} tags={tags} category={category} date={publishedOn} />
+
+## What is PrismJS?
+
+[PrismJS]() is a lightweight, extensible syntax highlighter that can be used when working with code blocks in markdown files in blog posts.
+
+### Why PrismJS?
+
+PrismJS has many different stylsheets that allow you to extensibly customise your code block styling to suit your style.
+
+## Adding PrismJS
+
+If you havent already read the previous post, do read it if you want to set up a blog like this one. You can fine it [here](/posts/build-a-nextjs-blog-tailwind-markdown)
+
+We need to install `remark-prism`:
+
+```shell
+yarn add remark-prism
+```
+
+Then we need to tell `webpack` and `babel` to use `remark-prism` as a `remark` plugin.
+
+Add the `remark-prism` to the remarkPlugins array inside `next.config.mjs` and add its import:
+
+```typescript
+import remarkPrism from "remark-prism";
+
+// ...
+remarkPlugins: [remarkPrism]; /* <-- */
+// ...
+```
+
+Once you have added the plugin we now need to choose a theme (CSS file) for prism to use. You can find them [here](https://github.com/PrismJS/prism-themes). I'll be using [Coldark Dark](https://raw.githubusercontent.com/PrismJS/prism-themes/master/themes/prism-coldark-dark.css).
+
+Copy the file contents and paste it into a new file named `prism.css` in the `/styles` folder.
+
+Then import `prism.css` in the `_app.tsx` file.
+
+Run your app with `yarn dev` and navigate to `localhost:3000` to check out your new styled syntax highlighting with PrismJS.
+
+</PostWrapper>
