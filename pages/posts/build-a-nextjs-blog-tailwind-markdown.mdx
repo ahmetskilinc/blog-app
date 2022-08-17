@@ -1,6 +1,6 @@
 ---
-title: Build a blog with Nextjs, Markdown and TailwindCSS
-author: Authors Name
+title: Build a Blog With Nextjs, Markdown and TailwindCSS
+author: Ahmet Kilinc
 category: Tutorial
 tags: nextjs, tutorial, typescript
 publishedOn: August 17 2022
@@ -8,10 +8,11 @@ publishedOn: August 17 2022
 
 import PostWrapper from "../../layout/PostWrapper";
 import OtherRandomPosts from "../../components/OtherRandomPosts";
+import PostHeader from "../../components/PostHeader";
 
 <PostWrapper>
 
-# Build a blog with Nextjs, Markdown and TailwindCSS
+<PostHeader title={title} author={author} tags={tags} category={category} date={publishedOn} />
 
 ## What is Nextjs?
 
@@ -334,10 +335,6 @@ Then we need to add it to our .mdx post file. (You will need to do this for ever
 ```markdown
 ---
 title: Building a blog
-author: Authors Name
-category: Tutorial
-tags: nextjs, tutorial, typescript
-publishedOn: August 17 2022
 ---
 
 import PostWrapper from "../../layout/PostWrapper";
@@ -359,8 +356,6 @@ If you now navigate to `localhost:3000/posts/first-post` it should have some sty
 
 ### Add better syntax highlighting
 
-Coming Soon!
+[How to add better syntax highlighting to your blog!](/posts/better-syntax-highlighting-with-prism)
 
 </PostWrapper>
-
-<OtherRandomPosts />

@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 import remarkFrontmatter from "remark-frontmatter";
+import remarkMdxFrontmatter from "remark-mdx-frontmatter";
 import remarkPrism from "remark-prism";
 
 export default {
@@ -12,7 +13,7 @@ export default {
 					loader: "@mdx-js/loader",
 					options: {
 						providerImportSource: "@mdx-js/react",
-						remarkPlugins: [remarkFrontmatter, remarkPrism],
+						remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter, remarkPrism],
 					},
 				},
 			],
