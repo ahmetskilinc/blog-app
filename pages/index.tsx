@@ -20,7 +20,7 @@ export default Home;
 
 export const getServerSideProps: GetServerSideProps = async () => {
 	try {
-		const posts = await axios.get("http://localhost:3001/api/posts").then((result) => {
+		const posts = await axios.get(`${process.env.URL}/posts`).then((result) => {
 			const sortedPosts = result.data.sort((a: Post, b: Post) => {
 				return new Date(b.publishedOn).getTime() - new Date(a.publishedOn).getTime();
 			});
