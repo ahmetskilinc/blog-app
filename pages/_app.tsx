@@ -24,6 +24,10 @@ function MyApp({ Component, pageProps }: AppProps) {
 					name="description"
 					content="My blog for tutorials and my experiences with web development."
 				/>
+				<link
+					rel="stylesheet"
+					href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;1,500;1,600&display=swap"
+				/>
 			</Head>
 			<Navbar />
 			<Main>

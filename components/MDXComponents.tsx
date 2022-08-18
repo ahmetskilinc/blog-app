@@ -33,7 +33,7 @@ const MDXComponents = {
 	) => <ol className="list-decimal not-prose" {...props} />,
 	code: (
 		props: JSX.IntrinsicAttributes & ClassAttributes<HTMLElement> & HTMLAttributes<HTMLElement>
-	) => <code className="rounded p-[3px] bg-zinc-700" {...props} />,
+	) => <code className="rounded p-[3px] bg-zinc-300 dark:bg-zinc-700" {...props} />,
 };
 
 export default MDXComponents;
