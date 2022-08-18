@@ -2,6 +2,7 @@ import type { GetServerSideProps, NextPage } from "next";
 import Posts from "../components/Posts";
 import type { Post } from "../types/Post";
 import { getPosts } from "../lib/getPosts";
+import axios from "axios";
 
 type Props = {
 	posts: Post[];
@@ -19,7 +20,12 @@ export default Home;
 
 export const getServerSideProps: GetServerSideProps = async () => {
 	try {
-		const posts = getPosts();
+		const posts = await axios.get("http://localhost:3001/api/posts").then((result) => {
+			const sortedPosts = result.data.sort((a: Post, b: Post) => {
+				return new Date(b.publishedOn).getTime() - new Date(a.publishedOn).getTime();
+			});
+			return sortedPosts;
+		});
 
 		return {
 			props: {
