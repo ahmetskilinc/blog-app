@@ -6,12 +6,12 @@ type Props = { posts: Post[] };
 
 const MorePosts = ({ posts }: Props) => {
 	return (
-		<div>
-			<h1>Latest Posts:</h1>
+		<div className="mt-7">
+			<h1 className="text-xl font-bold">Latest Posts:</h1>
 			{posts.length > 0 ? (
 				posts.map((post) => {
 					return (
-						<div className="my-11" key={post.title}>
+						<div className="my-3" key={post.title}>
 							<Link href={`/posts/${post.slug}`}>
 								<a className="hover:underline">
 									<h2 className="text-md">{post.title}</h2>
