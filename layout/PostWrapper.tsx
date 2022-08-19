@@ -1,5 +1,6 @@
 import axios from "axios";
 import { FunctionComponent, ReactNode, useEffect, useState } from "react";
+import config from "../app.config";
 import MorePosts from "../components/MorePosts";
 import { Post } from "../types/Post";
 
@@ -12,7 +13,7 @@ const PostWrapper: FunctionComponent<Props> = ({ children }) => {
 	const [posts, setPosts] = useState<Post[]>([] as Post[]);
 	useEffect(() => {
 		const fetchPosts = () => {
-			axios.get(`${process.env.URL}/posts`).then((result) => setPosts(result.data));
+			axios.get(`${config.appUrl}/posts`).then((result) => setPosts(result.data));
 		};
 		fetchPosts();
 	}, []);
