@@ -21,6 +21,9 @@ export default {
 
 		return config;
 	},
+	images: {
+		domains: ["unsplash.com"],
+	},
 	reactStrictMode: true,
 	swcMinify: true,
 	pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
