@@ -34,6 +34,11 @@ const MDXComponents = {
 	code: (
 		props: JSX.IntrinsicAttributes & ClassAttributes<HTMLElement> & HTMLAttributes<HTMLElement>
 	) => <code className="rounded p-[3px] bg-zinc-300 dark:bg-zinc-700" {...props} />,
+	img: (
+		props: JSX.IntrinsicAttributes &
+			ClassAttributes<HTMLImageElement> &
+			HTMLAttributes<HTMLImageElement>
+	) => <img {...props} className="w-full object-cover aspect-auto" />,
 };
 
 export default MDXComponents;
