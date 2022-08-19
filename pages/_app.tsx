@@ -13,6 +13,7 @@ import MDXComponents from "../components/MDXComponents";
 import Script from "next/script";
 import { useEffect } from "react";
 import { pageview } from "../lib/gtag";
+import config from "../app.config";
 
 Router.events.on("routeChangeStart", () => NProgress.start());
 Router.events.on("routeChangeComplete", () => NProgress.done());
