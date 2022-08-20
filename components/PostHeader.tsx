@@ -12,8 +12,10 @@ type Props = {
 const PostHeader = ({ title, author, tags, category, date }: Props) => {
 	return (
 		<>
-			<h1 className="text-2xl lg:text-4xl font-bold my-8">{title}</h1>
-			<p className="opacity-70">
+			<h1 className="text-2xl lg:text-4xl font-bold my-8 text-neutral-700 dark:text-neutral-200">
+				{title}
+			</h1>
+			<p className="opacity-70 ">
 				Posted
 				{author ? ` by ${author}, ` : " "}
 				{moment(new Date(date), "YYYYMMDD").fromNow()}

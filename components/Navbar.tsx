@@ -4,17 +4,21 @@ import { faUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 
 const Navbar = () => {
 	return (
-		<nav className="py-4">
-			<div className="max-w-[960px] mx-auto px-4 lg:px-0 flex justify-between align-middle">
-				<Link href="/">
-					<a className="hover:underline">
-						<p className="text-2xl">Ahmet</p>
-					</a>
-				</Link>
-				<div className="flex flex-row gap-4">
-					{/* <Link href="/">
-						<a className="hover:underline">Blog</a>
-					</Link> */}
+		<>
+			<nav className="py-10 text-neutral-600 dark:text-neutral-300">
+				<div className="max-w-[800px] mx-auto px-4 lg:px-0 flex justify-between items-center">
+					<div className="flex items-center gap-3">
+						<img
+							src="/memoji.png"
+							alt="My memoji"
+							className="bg-blue-400 rounded-full object-contain h-[44px] w-[44px] p-1"
+						/>
+						<Link href="/">
+							<a className="hover:underline">
+								<p className="text-2xl">Ahmet's Blog</p>
+							</a>
+						</Link>
+					</div>
 					<Link href="https://ahmetk.dev">
 						<a className="hover:underline" target="_blank">
 							Portfolio{" "}
@@ -26,8 +30,9 @@ const Navbar = () => {
 						</a>
 					</Link>
 				</div>
-			</div>
-		</nav>
+			</nav>
+			<hr className="border-neutral-300 dark:border-neutral-600" />
+		</>
 	);
 };
 

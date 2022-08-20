@@ -5,17 +5,27 @@ const MDXComponents = {
 		props: JSX.IntrinsicAttributes &
 			ClassAttributes<HTMLParagraphElement> &
 			HTMLAttributes<HTMLParagraphElement>
-	) => <p {...props} />,
+	) => <p {...props} className="text-neutral-700 dark:text-neutral-300" />,
 	a: (
 		props: JSX.IntrinsicAttributes &
 			ClassAttributes<HTMLAnchorElement> &
 			AnchorHTMLAttributes<HTMLAnchorElement>
-	) => <a className="hover:underline font-normal" {...props} />,
+	) => (
+		<a
+			className="hover:underline font-normal text-neutral-700 dark:text-neutral-300"
+			{...props}
+		/>
+	),
 	h1: (
 		props: JSX.IntrinsicAttributes &
 			ClassAttributes<HTMLHeadingElement> &
 			HTMLAttributes<HTMLHeadingElement>
-	) => <h1 {...props} />,
+	) => <h1 {...props} className="text-neutral-700 dark:text-neutral-300" />,
+	h2: (
+		props: JSX.IntrinsicAttributes &
+			ClassAttributes<HTMLHeadingElement> &
+			HTMLAttributes<HTMLHeadingElement>
+	) => <h2 {...props} className="text-neutral-700 dark:text-neutral-300" />,
 	li: (
 		props: JSX.IntrinsicAttributes &
 			ClassAttributes<HTMLLIElement> &

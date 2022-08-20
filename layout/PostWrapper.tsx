@@ -12,19 +12,25 @@ type Props = {
 const PostWrapper: FunctionComponent<Props> = ({ children }) => {
 	const [posts, setPosts] = useState<Post[]>([] as Post[]);
 	useEffect(() => {
-		const fetchPosts = () => {
-			axios.get(`${config.appUrl}/posts`).then((result) => setPosts(result.data));
+		const fetchPosts = async () => {
+			const posts = await axios.get(`${config.appUrl}/posts`);
+			setPosts(
+				posts.data.sort((a: Post, b: Post) => {
+					return new Date(b.publishedOn).getTime() - new Date(a.publishedOn).getTime();
+				})
+			);
 		};
+
 		fetchPosts();
 	}, []);
 
 	return (
-		<>
-			<article className="mt-6 max-w-none prose prose-stone prose-md dark:prose-invert">
+		<div className="pb-20">
+			<article className="my-10 max-w-none prose prose-neutral prose-md dark:prose-invert">
 				{children}
 			</article>
 			<MorePosts posts={posts} />
-		</>
+		</div>
 	);
 };
 

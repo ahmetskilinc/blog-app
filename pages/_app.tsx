@@ -60,7 +60,6 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
 					<Component {...pageProps} />
 				</MDXProvider>
 			</Main>
-			<Footer />
 		</>
 	);
 };
