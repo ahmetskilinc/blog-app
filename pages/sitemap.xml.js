@@ -12,11 +12,14 @@ export const getServerSideProps = async ({ res }) => {
 	const posts = await getPosts();
 
 	const staticPages = fs
-		.readdirSync("pages")
+		.readdirSync(
+			{
+				development: "pages",
+				production: "./",
+			}[process.env.NODE_ENV]
+		)
 		.filter((staticPage) => {
-			return !["_app.tsx", "_document.tsx", "_error.tsx", "sitemap.xml.js", "api"].includes(
-				staticPage
-			);
+			return !["_app.js", "_document.js", "_error.js", "sitemap.xml.js"].includes(staticPage);
 		})
 		.map((staticPagePath) => {
 			return `${baseUrl}/${staticPagePath}`;
