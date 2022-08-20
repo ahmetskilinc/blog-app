@@ -15,7 +15,7 @@ const Navbar = () => {
 						/>
 						<Link href="/">
 							<a className="hover:underline">
-								<p className="text-2xl">Ahmet's Blog</p>
+								<p className="text-2xl">Ahmet&apos;s Blog</p>
 							</a>
 						</Link>
 					</div>
