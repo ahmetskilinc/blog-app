@@ -21,11 +21,16 @@ const MorePosts = ({ posts }: Props) => {
 										<h2 className="text-md">{post.title}</h2>
 									</a>
 								</Link>
-								<div className="flex flex-row gap-16">
-									<p className="text-sm">
-										{moment(new Date(post.publishedOn), "YYYYMMDD").fromNow()}
-									</p>
-								</div>
+								{post.publishedOn && (
+									<div className="flex flex-row gap-16">
+										<p className="text-sm">
+											{moment(
+												new Date(post.publishedOn),
+												"YYYYMMDD"
+											).fromNow()}
+										</p>
+									</div>
+								)}
 							</div>
 						);
 					})
