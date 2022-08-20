@@ -25,7 +25,7 @@ const PostWrapper: FunctionComponent<Props> = ({ children }) => {
 	}, []);
 
 	return (
-		<div className="pb-20">
+		<div className="md:pb-20 pb-2">
 			<article className="my-10 max-w-none prose prose-neutral prose-md dark:prose-invert">
 				{children}
 			</article>

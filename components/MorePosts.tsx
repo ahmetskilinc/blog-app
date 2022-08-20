@@ -7,8 +7,8 @@ type Props = { posts: Post[] };
 const MorePosts = ({ posts }: Props) => {
 	return (
 		<div className="mt-7">
-			<h1 className="text-xl font-bold">Latest Posts:</h1>
-			<div className="grid grid-cols-3 gap-8">
+			<h1 className="text-xl font-bold">More Posts:</h1>
+			<div className="grid md:grid-cols-3 grid-rows-3 md:gap-8 gap-1">
 				{posts.length > 0 ? (
 					posts.map((post) => {
 						return (
