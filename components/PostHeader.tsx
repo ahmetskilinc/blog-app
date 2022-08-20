@@ -6,7 +6,7 @@ type Props = {
 	author: string;
 	tags: string[];
 	category: string;
-	date: string;
+	date?: string;
 };
 
 const PostHeader = ({ title, author, tags, category, date }: Props) => {
@@ -18,7 +18,7 @@ const PostHeader = ({ title, author, tags, category, date }: Props) => {
 			<p className="opacity-70 ">
 				Posted
 				{author ? ` by ${author}, ` : " "}
-				{moment(new Date(date), "YYYYMMDD").fromNow()}
+				{date && moment(new Date(date), "YYYYMMDD").fromNow()}
 			</p>
 		</>
 	);
