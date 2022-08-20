@@ -25,6 +25,7 @@ export const getPosts = async (limit?: number) => {
 				publishedOn: data.publishedOn,
 				tags: data.tags,
 				slug,
+				excerpt: data.excerpt,
 			};
 		})
 		.filter((post) => post);
