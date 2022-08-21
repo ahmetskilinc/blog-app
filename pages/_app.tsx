@@ -34,6 +34,7 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
 		<>
 			<Head>
 				<title>{`Ahmet's Blog`}</title>
+				<link rel="canonical" href={`${config.appUrl}${router.pathname}`} />
 			</Head>
 			<Script
 				strategy="afterInteractive"

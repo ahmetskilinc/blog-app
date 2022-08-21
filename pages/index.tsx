@@ -3,6 +3,7 @@ import Posts from "../components/Posts";
 import type { Post } from "../types/Post";
 import { getPosts } from "../lib/getPosts";
 import axios from "axios";
+import config from "../app.config";
 
 type Props = {
 	posts: Post[];
@@ -20,7 +21,7 @@ export default Home;
 
 export const getServerSideProps: GetServerSideProps = async () => {
 	try {
-		const posts = await axios.get(`${process.env.NEXT_PUBLIC_APP_URL}/posts`).then((result) => {
+		const posts = await axios.get(`${config.appUrl}/api/posts`).then((result) => {
 			const sortedPosts = result.data.sort((a: Post, b: Post) => {
 				return new Date(b.publishedOn).getTime() - new Date(a.publishedOn).getTime();
 			});
