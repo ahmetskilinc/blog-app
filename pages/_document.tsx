@@ -8,6 +8,10 @@ export default function Document() {
 					name="description"
 					content="My blog for tutorials and my experiences with web development."
 				/>
+				<meta
+					name="keywords"
+					content="Ahmet Kilinc, Blog, Ahmet Kilinc Dev Blog, Ahmet Kilinc Dev, Web Development, Front End, Frontend, Developer, AhmetK Dev Blog, AhmetK Dev"
+				/>
 				<link
 					rel="stylesheet"
 					href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;1,500;1,600&display=swap"
