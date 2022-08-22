@@ -23,8 +23,12 @@ const Posts = ({ posts }: Props) => {
 							</Link>
 							{post.publishedOn && (
 								<div className="flex flex-row gap-16 mb-1">
-									<p className="text-sm text-neutral-500">
-										<FontAwesomeIcon icon={faCalendarDays} />{" "}
+									<p className="text-sm text-neutral-500 flex items-center">
+										<FontAwesomeIcon
+											icon={faCalendarDays}
+											size="1x"
+											className="h-4 mr-2"
+										/>{" "}
 										{moment(new Date(post.publishedOn), "YYYYMMDD").fromNow()}
 									</p>
 								</div>

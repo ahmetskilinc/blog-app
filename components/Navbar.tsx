@@ -20,12 +20,12 @@ const Navbar = () => {
 						</Link>
 					</div>
 					<Link href="https://ahmetk.dev">
-						<a className="hover:underline" target="_blank">
+						<a className="hover:underline flex items-center" target="_blank">
 							Portfolio{" "}
 							<FontAwesomeIcon
 								icon={faUpRightFromSquare}
 								size="1x"
-								className="ml-1"
+								className="ml-1 h-4"
 							/>
 						</a>
 					</Link>

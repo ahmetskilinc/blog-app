@@ -5,10 +5,10 @@ import remarkPrism from "remark-prism";
 
 const ContentSecurityPolicy = `
   default-src 'self';
-  script-src 'self';
-  child-src example.com;
-  style-src 'self' example.com;
-  font-src 'self';  
+  script-src 'self' 'unsafe-inline' 'unsafe-eval';
+  child-src 'self';
+  style-src fonts.googleapis.com 'self';
+  font-src fonts.googleapis.com 'self';
 `;
 
 const securityHeaders = [
@@ -54,13 +54,13 @@ export default {
 	reactStrictMode: true,
 	swcMinify: true,
 	pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
-	async headers() {
-		return [
-			{
-				// Apply these headers to all routes in your application.
-				source: "/:path*",
-				headers: securityHeaders,
-			},
-		];
-	},
+	// async headers() {
+	// 	return [
+	// 		{
+	// 			// Apply these headers to all routes in your application.
+	// 			source: "/:path*",
+	// 			headers: securityHeaders,
+	// 		},
+	// 	];
+	// },
 };

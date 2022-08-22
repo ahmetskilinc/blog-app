@@ -12,26 +12,21 @@ const MorePosts = ({ posts }: Props) => {
 				{posts.length > 0 ? (
 					posts.map((post) => {
 						return (
-							<div
-								className="my-3 bg-neutral-300 dark:bg-neutral-700 rounded-lg p-6 flex flex-col gap-3"
-								key={post.title}
-							>
-								<Link href={`/posts/${post.slug}`}>
-									<a className="hover:underline">
-										<h2 className="text-md">{post.title}</h2>
-									</a>
-								</Link>
-								{post.publishedOn && (
-									<div className="flex flex-row gap-16">
-										<p className="text-sm">
-											{moment(
-												new Date(post.publishedOn),
-												"YYYYMMDD"
-											).fromNow()}
-										</p>
-									</div>
-								)}
-							</div>
+							<Link href={`/posts/${post.slug}`} key={post.title}>
+								<a className="hover:underline my-3  bg-neutral-200 hover:bg-neutral-300 dark:bg-neutral-800 hover:dark:bg-neutral-900 rounded-lg p-6 flex flex-col gap-3">
+									<h2 className="text-md">{post.title}</h2>
+									{post.publishedOn && (
+										<div className="flex flex-row gap-16">
+											<p className="text-sm">
+												{moment(
+													new Date(post.publishedOn),
+													"YYYYMMDD"
+												).fromNow()}
+											</p>
+										</div>
+									)}
+								</a>
+							</Link>
 						);
 					})
 				) : (
