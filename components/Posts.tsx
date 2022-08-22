@@ -23,7 +23,7 @@ const Posts = ({ posts }: Props) => {
 							</Link>
 							{post.publishedOn && (
 								<div className="flex flex-row gap-16 mb-1">
-									<p className="text-sm text-neutral-500 flex items-center">
+									<p className="text-sm text-neutral-600 flex items-center">
 										<FontAwesomeIcon
 											icon={faCalendarDays}
 											size="1x"

@@ -64,7 +64,7 @@ const PostHeader = ({ title, author, tags, category, date, excerpt }: Props) => 
 			>
 				{title}
 			</h1>
-			<div className="opacity-70 flex gap-1 my-0">
+			<div className="text-neutral-600 flex gap-1 my-0">
 				<p className="my-0">Posted</p>
 				<p
 					className="my-0"
