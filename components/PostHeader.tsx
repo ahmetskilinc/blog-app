@@ -1,6 +1,7 @@
 import moment from "moment";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import Script from "next/script";
 import React from "react";
 import config from "../app.config";
 
@@ -34,6 +35,23 @@ const PostHeader = ({ title, author, tags, category, date, excerpt }: Props) => 
 				<meta property="twitter:card" content="summary" />
 				<meta property="twitter:title" content={`${title} | Ahmet's Blog`} />
 				<meta property="twitter:description" content={excerpt} />
+
+				<Script
+					dangerouslySetInnerHTML={{
+						__html: `{
+							"@context": "https://schema.org",
+							"@type": "Blog",
+							"headline": "${title}",
+							"datePublished": "${date}",
+							"dateModified": "${date}",
+							"author": [{
+								"@type": "Person",
+								"name": "${author}",
+								"url": "https://ahmetk.dev/"
+							}]
+						}`,
+					}}
+				/>
 			</Head>
 			<h1
 				className="text-2xl lg:text-4xl font-bold my-8 text-neutral-700 dark:text-neutral-200"
