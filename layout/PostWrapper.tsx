@@ -26,7 +26,11 @@ const PostWrapper: FunctionComponent<Props> = ({ children }) => {
 
 	return (
 		<div className="md:pb-20 pb-2">
-			<article className="my-10 max-w-none prose prose-neutral prose-md dark:prose-invert">
+			<article
+				className="my-10 max-w-none prose prose-neutral prose-md dark:prose-invert"
+				itemScope
+				itemType="https://schema.org/Blog"
+			>
 				{children}
 			</article>
 			<MorePosts posts={posts} />
