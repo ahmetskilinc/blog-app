@@ -43,7 +43,7 @@ const PostHeader = ({ title, author, tags, category, date, excerpt }: Props) => 
 				dangerouslySetInnerHTML={{
 					__html: `{
 							"@context": "https://schema.org",
-							"@type": "Article",
+							"@type": "BlogPosting",
 							"headline": "${title}",
 							"datePublished": "${new Date(date!)}",
 							"dateModified": "${new Date(date!)}",
