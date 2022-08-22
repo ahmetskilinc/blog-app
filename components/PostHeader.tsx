@@ -35,14 +35,33 @@ const PostHeader = ({ title, author, tags, category, date, excerpt }: Props) => 
 				<meta property="twitter:title" content={`${title} | Ahmet's Blog`} />
 				<meta property="twitter:description" content={excerpt} />
 			</Head>
-			<h1 className="text-2xl lg:text-4xl font-bold my-8 text-neutral-700 dark:text-neutral-200">
+			<h1
+				className="text-2xl lg:text-4xl font-bold my-8 text-neutral-700 dark:text-neutral-200"
+				itemProp="headline"
+				itemScope
+				itemType="https://schema.org/Text"
+			>
 				{title}
 			</h1>
-			<p className="opacity-70 ">
-				Posted
-				{author ? ` by ${author}, ` : " "}
-				{date && moment(new Date(date), "YYYYMMDD").fromNow()}
-			</p>
+			<div className="opacity-70 flex gap-1 my-0">
+				<p className="my-0">Posted</p>
+				<p
+					className="my-0"
+					itemProp="author"
+					itemScope
+					itemType="https://schema.org/Person"
+				>
+					{author ? ` by ${author}, ` : " "}
+				</p>
+				<p
+					className="my-0"
+					itemProp="datePublished"
+					itemScope
+					itemType="https://schema.org/Date"
+				>
+					{date && moment(new Date(date), "YYYYMMDD").fromNow()}
+				</p>
+			</div>
 		</>
 	);
 };
