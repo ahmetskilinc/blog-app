@@ -45,8 +45,8 @@ const PostHeader = ({ title, author, tags, category, date, excerpt }: Props) => 
 							"@context": "https://schema.org",
 							"@type": "Blog",
 							"headline": "${title}",
-							"datePublished": "${date}",
-							"dateModified": "${date}",
+							"datePublished": "${new Date(date!)}",
+							"dateModified": "${new Date(date!)}",
 							"author": [{
 								"@type": "Person",
 								"name": "${author}",
