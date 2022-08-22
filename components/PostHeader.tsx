@@ -39,6 +39,7 @@ const PostHeader = ({ title, author, tags, category, date, excerpt }: Props) => 
 
 			<Script
 				id="add-schema"
+				type="application/ld+json"
 				dangerouslySetInnerHTML={{
 					__html: `{
 							"@context": "https://schema.org",
