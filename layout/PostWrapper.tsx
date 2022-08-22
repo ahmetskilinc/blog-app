@@ -25,11 +25,12 @@ const PostWrapper: FunctionComponent<Props> = ({ children }) => {
 	}, []);
 
 	return (
-		<div className="md:pb-20 pb-2">
+		<div className="md:pb-20 pb-2" itemScope itemType="https://schema.org/Blog">
 			<article
 				className="my-10 max-w-none prose prose-neutral prose-md dark:prose-invert"
+				itemProp="articleBody"
 				itemScope
-				itemType="https://schema.org/Blog"
+				itemType="https://schema.org/Text"
 			>
 				{children}
 			</article>
