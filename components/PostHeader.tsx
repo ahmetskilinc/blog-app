@@ -35,10 +35,11 @@ const PostHeader = ({ title, author, tags, category, date, excerpt }: Props) => 
 				<meta property="twitter:card" content="summary" />
 				<meta property="twitter:title" content={`${title} | Ahmet's Blog`} />
 				<meta property="twitter:description" content={excerpt} />
+			</Head>
 
-				<Script
-					dangerouslySetInnerHTML={{
-						__html: `{
+			<Script
+				dangerouslySetInnerHTML={{
+					__html: `{
 							"@context": "https://schema.org",
 							"@type": "Blog",
 							"headline": "${title}",
@@ -50,9 +51,9 @@ const PostHeader = ({ title, author, tags, category, date, excerpt }: Props) => 
 								"url": "https://ahmetk.dev/"
 							}]
 						}`,
-					}}
-				/>
-			</Head>
+				}}
+			/>
+
 			<h1
 				className="text-2xl lg:text-4xl font-bold my-8 text-neutral-700 dark:text-neutral-200"
 				itemProp="headline"
