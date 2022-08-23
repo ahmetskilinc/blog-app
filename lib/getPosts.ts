@@ -31,7 +31,11 @@ export const getPosts = async (limit?: number) => {
 		.filter((post) => post);
 
 	if (limit) {
-		return posts.splice(4, 1) as any as Post[];
+		return posts
+			.sort((a: any, b: any) => {
+				return new Date(b.publishedOn).getTime() - new Date(a.publishedOn).getTime();
+			})
+			.splice(0, 3) as any as Post[];
 	}
 
 	return posts as any as Post[];
