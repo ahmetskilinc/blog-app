@@ -6,8 +6,8 @@ import EditThisPage from "./EditThisPage";
 const Navbar = () => {
 	return (
 		<>
-			<nav className="py-10 text-neutral-600 dark:text-neutral-300">
-				<div className="max-w-[800px] mx-auto px-4 lg:px-0 flex justify-between items-center">
+			<nav className="text-neutral-600 dark:text-neutral-300 h-28 flex items-center w-full">
+				<div className="max-w-[800px] w-full mx-auto px-4 lg:px-0 flex justify-between items-center">
 					<div className="flex items-center gap-3">
 						<img
 							src="/memoji.png"
