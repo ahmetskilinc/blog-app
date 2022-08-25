@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { getPosts } from "../../lib/getPosts";
-import type { Post } from "../../types/Post";
+import { getPosts } from "../../../lib/getPosts";
+import type { Post } from "../../../types/Post";
 
 const Posts = async (req: NextApiRequest, res: NextApiResponse<Post[]>) => {
 	const { limit } = req.query;
