@@ -3,7 +3,7 @@ import path from "path";
 import matter from "gray-matter";
 import { Post } from "../types/Post";
 
-export const getPosts = async (limit?: number) => {
+const getPosts = async (limit?: number) => {
 	const dirFiles = fs.readdirSync(path.join(process.cwd(), "pages", "posts"), {
 		withFileTypes: true,
 	});
@@ -40,3 +40,5 @@ export const getPosts = async (limit?: number) => {
 
 	return posts as any as Post[];
 };
+
+export default getPosts;

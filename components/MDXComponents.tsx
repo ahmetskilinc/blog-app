@@ -11,12 +11,7 @@ const MDXComponents = {
 		props: JSX.IntrinsicAttributes &
 			ClassAttributes<HTMLAnchorElement> &
 			AnchorHTMLAttributes<HTMLAnchorElement>
-	) => (
-		<a
-			className="hover:underline font-normal text-neutral-700 dark:text-neutral-300"
-			{...props}
-		/>
-	),
+	) => <a className="font-normal text-neutral-700 dark:text-neutral-300" {...props} />,
 	pre: (
 		props: JSX.IntrinsicAttributes &
 			ClassAttributes<HTMLPreElement> &
@@ -38,7 +33,7 @@ const MDXComponents = {
 		props: JSX.IntrinsicAttributes &
 			ClassAttributes<HTMLHeadingElement> &
 			HTMLAttributes<HTMLHeadingElement>
-	) => <h2 {...props} className="text-neutral-700 dark:text-neutral-300" />,
+	) => <h2 {...props} className="text-neutral-700 mt-10 dark:text-neutral-300" />,
 	li: (
 		props: JSX.IntrinsicAttributes &
 			ClassAttributes<HTMLLIElement> &

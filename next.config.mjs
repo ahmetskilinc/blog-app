@@ -51,7 +51,12 @@ export default {
 	images: {
 		domains: ["unsplash.com"],
 	},
-	reactStrictMode: true,
+	experimental: {
+		images: {
+			allowFutureImage: true,
+		},
+	},
+	reactStrictMode: false,
 	swcMinify: true,
 	pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
 	// async headers() {

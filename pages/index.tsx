@@ -1,7 +1,6 @@
 import type { GetServerSideProps, NextPage } from "next";
 import Posts from "../components/Posts";
 import type { Post } from "../types/Post";
-import { getPosts } from "../lib/getPosts";
 import axios from "axios";
 import config from "../app.config";
 
@@ -12,7 +11,7 @@ type Props = {
 const Home: NextPage<Props> = ({ posts }) => {
 	return (
 		<div>
-			<Posts posts={posts} />
+			<Posts posts={posts} showSearch={true} />
 		</div>
 	);
 };

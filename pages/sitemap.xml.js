@@ -1,5 +1,5 @@
 import fs from "fs";
-import { getPosts } from "../lib/getPosts";
+import getPosts from "../lib/getPosts";
 
 const Sitemap = () => {};
 
@@ -62,8 +62,6 @@ export const getServerSideProps = async ({ res }) => {
 			.join("")}
     </urlset>
   `;
-
-	console.log(staticPages);
 
 	res.setHeader("Content-Type", "text/xml");
 	res.write(sitemap);

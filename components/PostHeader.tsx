@@ -57,7 +57,7 @@ const PostHeader = ({ title, author, tags, category, date, excerpt }: Props) => 
 			/>
 
 			<h1
-				className="text-2xl lg:text-4xl font-bold my-8 text-neutral-700 dark:text-neutral-200"
+				className="text-2xl lg:text-4xl font-bold mt-8 mb-2 text-neutral-700 dark:text-neutral-200"
 				itemProp="headline"
 				itemScope
 				itemType="https://schema.org/Text"

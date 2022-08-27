@@ -2,7 +2,7 @@
 title: Build a Blog With Nextjs, Markdown and TailwindCSS
 author: Ahmet Kilinc
 category: Tutorial
-tags: nextjs, tutorial, typescript
+tags: ["nextjs", "tutorial", "typescript"]
 publishedOn: August 17 2022
 excerpt: We'll build a blog using Markdown(MDX), NextJS and TailwindCSS, with complete code examples and links.
 ---
@@ -228,7 +228,7 @@ First at the top of the `index.tsx` file lets add our imports:
 ```typescript
 import type { GetServerSideProps, NextPage } from "next";
 import type { Post } from "../types/Post";
-import { getPosts } from "../utils/getPosts";
+import getPosts from "../utils/getPosts";
 ```
 
 We need to create a `Post` type for out posts. So create a new folder `types` in our root, then create a file `Post.ts` with the following:

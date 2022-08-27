@@ -1,6 +1,7 @@
 import axios from "axios";
 import { FunctionComponent, ReactNode, useEffect, useState } from "react";
 import config from "../app.config";
+import EditThisPage from "../components/EditThisPage";
 import MorePosts from "../components/MorePosts";
 import { Post } from "../types/Post";
 
@@ -23,13 +24,14 @@ const PostWrapper: FunctionComponent<Props> = ({ children }) => {
 	return (
 		<div className="md:pb-20 pb-2" itemScope itemType="https://schema.org/Blog">
 			<article
-				className="my-10 max-w-none prose prose-neutral prose-md dark:prose-invert"
+				className="my-4 max-w-none prose prose-neutral prose-md dark:prose-invert"
 				itemProp="articleBody"
 				itemScope
 				itemType="https://schema.org/Text"
 			>
 				{children}
 			</article>
+			<EditThisPage />
 			<MorePosts posts={posts} />
 		</div>
 	);
