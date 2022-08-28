@@ -4,7 +4,7 @@ import matter from "gray-matter";
 import { Post } from "../types/Post";
 
 const getPosts = async (limit?: number) => {
-	const dirFiles = fs.readdirSync(path.join(process.cwd(), "pages", "posts"), {
+	const dirFiles = fs.readdirSync(path.join(process.cwd(), "pages", "p"), {
 		withFileTypes: true,
 	});
 
@@ -13,7 +13,7 @@ const getPosts = async (limit?: number) => {
 			if (!file.name.endsWith(".mdx")) return;
 
 			const fileContent = fs.readFileSync(
-				path.join(process.cwd(), "pages", "posts", file.name),
+				path.join(process.cwd(), "pages", "p", file.name),
 				"utf-8"
 			);
 			const { data } = matter(fileContent);

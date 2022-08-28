@@ -8,7 +8,7 @@ const Navbar = () => {
 	return (
 		<>
 			<nav className="text-neutral-600 dark:text-neutral-300 h-28 flex items-center w-full">
-				<div className="max-w-[800px] w-full mx-auto px-4 lg:px-0 flex justify-between items-center">
+				<div className="max-w-[860px] w-full mx-auto px-4 lg:px-0 flex justify-between items-center">
 					<div className="flex items-center gap-3">
 						<Image
 							src={img}
@@ -25,6 +25,9 @@ const Navbar = () => {
 					<div className="flex flex-col lg:flex-row items-end gap-y-1 gap-x-6">
 						<Link href="/tags">
 							<a className="hover:underline flex items-center">Tags</a>
+						</Link>
+						<Link href="/projects">
+							<a className="hover:underline flex items-center">Projects</a>
 						</Link>
 						<Link href="https://ahmetk.dev">
 							<a className="hover:underline flex items-center" target="_blank">

@@ -294,7 +294,7 @@ return (
 			posts.map((post) => {
 				return (
 					<div className="my-11" key={post.data.title}>
-						<Link href={`/posts/${post.slug}`}>
+						<Link href={`/p/${post.slug}`}>
 							<a className="hover:underline">
 								<h2 className="text-xl">{post.data.title}</h2>
 							</a>
@@ -363,6 +363,6 @@ If you now navigate to `localhost:3000/posts/first-post` it should have some sty
 
 ### Add better syntax highlighting
 
-[How to add better syntax highlighting to your blog!](/posts/better-syntax-highlighting-with-prism)
+[How to add better syntax highlighting to your blog!](/p/better-syntax-highlighting-with-prism)
 
 </PostWrapper>

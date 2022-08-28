@@ -11,6 +11,11 @@ type Props = {
 const Home: NextPage<Props> = ({ posts }) => {
 	return (
 		<div>
+			<div className="space-x-2 pt-6 pb-8 md:space-y-5">
+				<h1 className="text-3xl font-extrabold text-neutral-700 dark:text-neutral-200">
+					Latest Posts
+				</h1>
+			</div>
 			<Posts posts={posts} showSearch={true} />
 		</div>
 	);

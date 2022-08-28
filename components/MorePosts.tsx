@@ -12,7 +12,7 @@ const MorePosts = ({ posts }: Props) => {
 				{posts.length > 0 ? (
 					posts.map((post) => {
 						return (
-							<Link href={`/posts/${post.slug}`} key={post.title}>
+							<Link href={`/p/${post.slug}`} key={post.title}>
 								<a className="hover:underline my-3  bg-neutral-200 hover:bg-neutral-300 dark:bg-neutral-800 hover:dark:bg-neutral-900 rounded-lg p-6 flex flex-col gap-3">
 									<h2 className="text-md">{post.title}</h2>
 									{post.publishedOn && (

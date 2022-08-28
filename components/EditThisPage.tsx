@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 
 const EditThisPage = () => {
 	const router = useRouter();
-	return router.pathname.includes("/posts/") ? (
+	return router.pathname.includes("/p/") ? (
 		<Link
 			href={`https://github.com/ahmetskilinc/blog-app/blob/main/pages${router.pathname}.mdx`}
 		>

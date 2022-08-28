@@ -52,7 +52,7 @@ export const getServerSideProps = async ({ res }) => {
 			.map(({ slug, publishedOn }) => {
 				return `
               <url>
-                <loc>${baseUrl}/posts/${slug}</loc>
+                <loc>${baseUrl}/p/${slug}</loc>
                 ${publishedOn ? `<lastmod>${new Date(publishedOn).toISOString()}</lastmod>` : ""}
                 <changefreq>monthly</changefreq>
                 <priority>1.0</priority>
