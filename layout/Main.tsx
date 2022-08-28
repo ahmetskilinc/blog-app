@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import MailChimp from "../components/MailChimp";
 
 type Props = {
 	children: ReactNode;
