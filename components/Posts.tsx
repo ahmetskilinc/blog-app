@@ -20,7 +20,7 @@ const Posts = ({ posts, showSearch }: Props) => {
 	return (
 		<>
 			{showSearch && (
-				<div className="relative max-w-lg mt-4">
+				<div className="relative max-w-lg">
 					<input
 						aria-label="Search articles"
 						type="text"
